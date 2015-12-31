@@ -25,6 +25,10 @@ angular.module('AngularFlask', ['angularFlaskServices'])
 			templateUrl: 'static/partials/post-list.html',
 			controller: PostListController
 		})
+		.when('/dashboard', {
+			templateUrl: 'static/partials/dashboard.html',
+			controller: DashboardController
+		})
 		.otherwise({
 			redirectTo: '/'
 		})

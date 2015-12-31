@@ -1,0 +1,117 @@
+
+<div class="container-fluid page navbar-lower">
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon">Player</div>
+        <input type="text" class="form-control" id="player" ng-model="player" placeholder="Songhai">
+      </div>
+      vs
+      <div class="input-group">
+        <div class="input-group-addon">Opponent</div>
+        <input type="text" class="form-control" id="opponent" ng-model="opponent" placeholder="Vanar">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="win" value="false"> You Won?
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="first" value="false"> First Player?
+        </label>
+      </div>
+    </div>
+    <button ng-click="addGame(player, opponent, win, first)" class="btn btn-default">Add Game</button>
+  </form>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class='game-list col-sm-4 col-md-3'>
+      <div ng-repeat="game in games | orderBy: 'id':true ">
+        <h4>{{ game.id }}: <span ng-class="{winner: game.win}">{{ game.player }}</span> vs <span ng-class="{winner: !game.win}">{{ game.opponent }}</span></h4>
+        <p>Player first: {{ game.first }}, played: {{game.date}}</p>
+      </div>
+    </div>
+    <div class='charts col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3'>
+      <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th>You \ Opp</th>
+                  <th>Total</th>
+                  <th>Lyonar</th>
+                  <th>Songhai</th>
+                  <th>Vetruvian</th>
+                  <th>Abyssian</th>
+                  <th>Magmar</th>
+                  <th>Vanar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Lyonar</th>
+                  <td>{{ (stats.Lyonar.overall[0]*100/stats.Lyonar.overall[1])| number:0 }}%, ({{ stats.Lyonar.overall[1] }}) </td>
+                  <td>{{ (stats.Lyonar.Lyonar[0]*100/stats.Lyonar.Lyonar[1])| number:0 }}%, ({{ stats.Lyonar.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Lyonar.Songhai[0]*100/stats.Lyonar.Songhai[1])| number:0 }}%, ({{ stats.Lyonar.Songhai[1] }})</td>
+                  <td>{{ (stats.Lyonar.Vetruvian[0]*100/stats.Lyonar.Vetruvian[1])| number:0 }}%, ({{ stats.Lyonar.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Lyonar.Abyssian[0]*100/stats.Lyonar.Abyssian[1])| number:0 }}%, ({{ stats.Lyonar.Abyssian[1] }})</td>
+                  <td>{{ (stats.Lyonar.Magmar[0]*100/stats.Lyonar.Magmar[1])| number:0 }}%, ({{ stats.Lyonar.Magmar[1] }})</td>
+                  <td>{{ (stats.Lyonar.Vanar[0]*100/stats.Lyonar.Vanar[1])| number:0 }}%, ({{ stats.Lyonar.Vanar[1] }})</td>
+                </tr>
+                <tr>
+                  <th>Songhai</th>
+                  <td>{{ (stats.Songhai.overall[0]*100/stats.Songhai.overall[1])| number:0 }}%, ({{ stats.Songhai.overall[1] }}) </td>
+                  <td>{{ (stats.Songhai.Lyonar[0]*100/stats.Songhai.Lyonar[1])| number:0 }}%, ({{ stats.Songhai.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Songhai.Songhai[0]*100/stats.Songhai.Songhai[1])| number:0 }}%, ({{ stats.Songhai.Songhai[1] }})</td>
+                  <td>{{ (stats.Songhai.Vetruvian[0]*100/stats.Songhai.Vetruvian[1])| number:0 }}%, ({{ stats.Songhai.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Songhai.Abyssian[0]*100/stats.Songhai.Abyssian[1])| number:0 }}%, ({{ stats.Songhai.Abyssian[1] }})</td>
+                  <td>{{ (stats.Songhai.Magmar[0]*100/stats.Songhai.Magmar[1])| number:0 }}%, ({{ stats.Songhai.Magmar[1] }})</td>
+                  <td>{{ (stats.Songhai.Vanar[0]*100/stats.Songhai.Vanar[1])| number:0 }}%, ({{ stats.Songhai.Vanar[1] }})</td>
+                </tr>
+                <tr>
+                  <th>Vetruvian</th>
+                  <td>{{ (stats.Vetruvian.overall[0]*100/stats.Vetruvian.overall[1])| number:0 }}%, ({{ stats.Vetruvian.overall[1] }}) </td>
+                  <td>{{ (stats.Vetruvian.Lyonar[0]*100/stats.Vetruvian.Lyonar[1])| number:0 }}%, ({{ stats.Vetruvian.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Vetruvian.Songhai[0]*100/stats.Vetruvian.Songhai[1])| number:0 }}%, ({{ stats.Vetruvian.Songhai[1] }})</td>
+                  <td>{{ (stats.Vetruvian.Vetruvian[0]*100/stats.Vetruvian.Vetruvian[1])| number:0 }}%, ({{ stats.Vetruvian.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Vetruvian.Abyssian[0]*100/stats.Vetruvian.Abyssian[1])| number:0 }}%, ({{ stats.Vetruvian.Abyssian[1] }})</td>
+                  <td>{{ (stats.Vetruvian.Magmar[0]*100/stats.Vetruvian.Magmar[1])| number:0 }}%, ({{ stats.Vetruvian.Magmar[1] }})</td>
+                  <td>{{ (stats.Vetruvian.Vanar[0]*100/stats.Vetruvian.Vanar[1])| number:0 }}%, ({{ stats.Vetruvian.Vanar[1] }})</td>
+                </tr>
+                <tr>
+                  <th>Abyssian</th>
+                  <td>{{ (stats.Abyssian.overall[0]*100/stats.Abyssian.overall[1])| number:0 }}%, ({{ stats.Abyssian.overall[1] }}) </td>
+                  <td>{{ (stats.Abyssian.Lyonar[0]*100/stats.Abyssian.Lyonar[1])| number:0 }}%, ({{ stats.Abyssian.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Abyssian.Songhai[0]*100/stats.Abyssian.Songhai[1])| number:0 }}%, ({{ stats.Abyssian.Songhai[1] }})</td>
+                  <td>{{ (stats.Abyssian.Vetruvian[0]*100/stats.Abyssian.Vetruvian[1])| number:0 }}%, ({{ stats.Abyssian.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Abyssian.Abyssian[0]*100/stats.Abyssian.Abyssian[1])| number:0 }}%, ({{ stats.Abyssian.Abyssian[1] }})</td>
+                  <td>{{ (stats.Abyssian.Magmar[0]*100/stats.Abyssian.Magmar[1])| number:0 }}%, ({{ stats.Abyssian.Magmar[1] }})</td>
+                  <td>{{ (stats.Abyssian.Vanar[0]*100/stats.Abyssian.Vanar[1])| number:0 }}%, ({{ stats.Abyssian.Vanar[1] }})</td>
+                </tr>
+                <tr>
+                  <th>Magmar</th>
+                  <td>{{ (stats.Magmar.overall[0]*100/stats.Magmar.overall[1])| number:0 }}%, ({{ stats.Magmar.overall[1] }}) </td>
+                  <td>{{ (stats.Magmar.Lyonar[0]*100/stats.Magmar.Lyonar[1])| number:0 }}%, ({{ stats.Magmar.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Magmar.Songhai[0]*100/stats.Magmar.Songhai[1])| number:0 }}%, ({{ stats.Magmar.Songhai[1] }})</td>
+                  <td>{{ (stats.Magmar.Vetruvian[0]*100/stats.Magmar.Vetruvian[1])| number:0 }}%, ({{ stats.Magmar.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Magmar.Abyssian[0]*100/stats.Magmar.Abyssian[1])| number:0 }}%, ({{ stats.Magmar.Abyssian[1] }})</td>
+                  <td>{{ (stats.Magmar.Magmar[0]*100/stats.Magmar.Magmar[1])| number:0 }}%, ({{ stats.Magmar.Magmar[1] }})</td>
+                  <td>{{ (stats.Magmar.Vanar[0]*100/stats.Magmar.Vanar[1])| number:0 }}%, ({{ stats.Magmar.Vanar[1] }})</td>
+                </tr>
+                <tr>
+                  <th>Vanar</th>
+                  <td>{{ (stats.Vanar.overall[0]*100/stats.Vanar.overall[1])| number:0 }}%, ({{ stats.Vanar.overall[1] }}) </td>
+                  <td>{{ (stats.Vanar.Lyonar[0]*100/stats.Vanar.Lyonar[1])| number:0 }}%, ({{ stats.Vanar.Lyonar[1] }}) </td>
+                  <td>{{ (stats.Vanar.Songhai[0]*100/stats.Vanar.Songhai[1])| number:0 }}%, ({{ stats.Vanar.Songhai[1] }})</td>
+                  <td>{{ (stats.Vanar.Vetruvian[0]*100/stats.Vanar.Vetruvian[1])| number:0 }}%, ({{ stats.Vanar.Vetruvian[1] }})</td>
+                  <td>{{ (stats.Vanar.Abyssian[0]*100/stats.Vanar.Abyssian[1])| number:0 }}%, ({{ stats.Vanar.Abyssian[1] }})</td>
+                  <td>{{ (stats.Vanar.Magmar[0]*100/stats.Vanar.Magmar[1])| number:0 }}%, ({{ stats.Vanar.Magmar[1] }})</td>
+                  <td>{{ (stats.Vanar.Vanar[0]*100/stats.Vanar.Vanar[1])| number:0 }}%, ({{ stats.Vanar.Vanar[1] }})</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+</div>
