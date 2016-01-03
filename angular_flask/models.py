@@ -1,6 +1,5 @@
 from datetime import datetime
-from angular_flask.core import db
-from angular_flask import app
+from angular_flask import app, db
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 
@@ -51,7 +50,7 @@ class User(db.Model):
         return False
 
     def get_id(self):
-        return str(self.id)  # python 3
+        return unicode(self.id)
 
     def __repr__(self):
         return '<User %r>' % (self.email)

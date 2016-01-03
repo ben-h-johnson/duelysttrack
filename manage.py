@@ -3,7 +3,7 @@ import json
 import argparse
 import requests
 
-from angular_flask.core import db
+from angular_flask import db
 from angular_flask.models import Post
 
 

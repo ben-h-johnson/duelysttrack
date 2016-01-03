@@ -4,10 +4,9 @@ from flask import Flask, request, Response
 from flask import render_template, url_for, redirect, send_from_directory
 from flask import send_file, make_response, abort
 
-from angular_flask import app
+from angular_flask import app, api_manager, lm
 
 # routing for API endpoints, generated from the models designated as API_MODELS
-from angular_flask.core import api_manager
 from angular_flask.models import *
 
 for model_name in app.config['API_MODELS']:
@@ -15,6 +14,10 @@ for model_name in app.config['API_MODELS']:
     api_manager.create_api(model_class, methods=['GET', 'POST'])
 
 session = api_manager.session
+
+@lm.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 
 # routing for basic pages (pass routing onto the Angular app)
